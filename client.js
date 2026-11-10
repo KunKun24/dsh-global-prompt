@@ -71,6 +71,26 @@ window.__ModuleLoader__.load({
       color: 'inherit', fontFamily: 'inherit', outline: 'none',
     };
 
+    /** 「觉得好用点个 Star」：所有插件设置页统一的仓库入口。 */
+    function RepoInvite() {
+      return h('div', {
+        style: {
+          marginTop: 18, paddingTop: 14, borderTop: '1px solid ' + LINE,
+          display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
+          fontSize: 12.5, color: MUTED,
+        },
+      },
+        h('span', { style: { color: '#f5a623' } }, '\u2605'),
+        h('span', null, '觉得好用的话，点个 Star 吧'),
+        h('a', {
+          href: 'https://github.com/KunKun24/dsh-global-prompt',
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          style: { color: BRAND, textDecoration: 'none' },
+        }, 'GitHub 仓库')
+      );
+    }
+
     function Panel() {
       const [state, setState] = useState(null);
       const [preview, setPreview] = useState('');
@@ -179,6 +199,8 @@ window.__ModuleLoader__.load({
           h('div', { style: { fontWeight: 600, color: 'inherit', marginBottom: 6 } }, '最终生效内容'),
           preview ? preview : '（当前未启用任何内容）'
         ),
+
+        h(RepoInvite, { key: 'repo' }),
 
         status ? h('div', { style: { marginTop: 10, fontSize: 12, color: MUTED } }, status) : null
       );
