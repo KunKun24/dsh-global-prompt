@@ -1,0 +1,60 @@
+{
+  "name": "dsh-global-prompt",
+  "version": "1.0.0",
+  "description": "给自己加一段全局提示词，每条对话都生效（DeepSeek Harness 插件）",
+  "icon": "icon.png",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/",
+    "icon.png",
+    "icon.svg",
+    "README.md",
+    "README.en.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "system-prompt",
+    "persona",
+    "prompt"
+  ],
+  "author": {
+    "name": "困困",
+    "url": "https://github.com/KunKun24"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KunKun24/dsh-global-prompt.git"
+  },
+  "homepage": "https://github.com/KunKun24/dsh-global-prompt#readme",
+  "bugs": {
+    "url": "https://github.com/KunKun24/dsh-global-prompt/issues"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-slots"
+      ],
+      "platform": "web"
+    }
+  }
+}

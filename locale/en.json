@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Global prompt",
+    "description": "Add one global prompt or persona that is injected into every new conversation, first turn only."
+  }
+}

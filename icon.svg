@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180" role="img" aria-label="Global prompt">
+  <title>Global prompt</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2BD9A6"/>
+      <stop offset="1" stop-color="#0C8F74"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="42" fill="url(#bg)"/>
+  <g fill="none" stroke="#fff" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M49 67H104"/>
+    <path d="M49 90H104"/>
+    <path d="M49 113H86.5"/>
+    <polygon points="114.00,89.00 119.43,107.57 138.00,113.00 119.43,118.43 114.00,137.00 108.57,118.43 90.00,113.00 108.57,107.57" fill="#fff" stroke="none"/>
+  </g>
+</svg>

@@ -1,0 +1,3 @@
+- insert:
+    - id: global-prompt
+      name: 'dsh-global-prompt'
