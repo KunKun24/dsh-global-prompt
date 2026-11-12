@@ -54,3 +54,9 @@ restart. Delete `$DSH_HOME/global-prompt.json` if you also want to drop the text
 ## License
 
 MIT © 2026 困困
+
+---
+
+## About AIGC
+
+> This project contains AIGC (AI-generated) content. AI shortened development time; every line of code was carefully reviewed.

@@ -55,3 +55,9 @@ cd ~/.dsh/profiles/web && pnpm install && dsh web
 ## 许可证
 
 MIT
+
+---
+
+## 关于 AIGC
+
+> 项目包含 AIGC 内容，AI 减少了开发时间；我们也认真审核了每一条代码。
