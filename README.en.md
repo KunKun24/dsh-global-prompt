@@ -1,5 +1,7 @@
 # dsh-global-prompt
 
+[中文](README.md) · DeepSeek Harness plugin · MIT
+
 One global prompt or persona, injected into every new conversation.
 
 ## What it does
