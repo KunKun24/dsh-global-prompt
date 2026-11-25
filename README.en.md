@@ -1,62 +1,80 @@
-# dsh-global-prompt
+# dsh-global-prompt · Global system prompt
 
-[中文](README.md) · DeepSeek Harness plugin · MIT
+[**简体中文**](README.md) · [English](README.en.md)
 
-One global prompt or persona, injected into every new conversation.
+![version](https://img.shields.io/badge/version-1.1.0-blue)
+![license](https://img.shields.io/badge/license-MIT-2ea44f)
+![dsh](https://img.shields.io/badge/DSH-%E2%89%A50.2.0-6f42c1)
+
+Write your standing instructions once — every new conversation picks them up automatically.
+
+![Open the global prompt panel from the sidebar and toggle a switch](assets/demo.gif)
+
+> A DeepSeek Harness (DSH) plugin for DSH 0.2.0 or newer.
 
 ## What it does
 
-Write a persona and/or a prompt once in the sidebar panel; every **new**
-conversation starts with it as an extra system-prompt section, inserted right
-after the deployment persona.
+Keeps "things the model should always know" in one place: tone, output format, hard rules, or a fixed persona. Set it once, it applies to every new chat, and it is injected in the first turn only — no token cost afterwards.
 
-- Total limit 4000 characters, 2000 per part, so a request can never be blown up
-- Injected on the first turn only — later turns return an empty string
-- Per-scope counter uses a `WeakMap`; the scope object is never serialised
-  (Cordis guard proxies throw on `JSON.stringify`, which would break every
-  outgoing message)
+## Features
 
-## Settings
+- **Global prompt**: extra requirements injected as their own system-prompt paragraph
+- **Global persona**: identity and tone for the assistant, toggled independently
+- **Chinese reasoning preset**: one-click "请用中文进行思考回答"
+- **Effective content preview**: shows exactly what will be injected
+- Toggle anything off instantly; changes apply without a restart
 
-Sidebar → "全局提示词". Three switches: Chinese-thinking preset, persona, prompt.
-The state lives in `$DSH_HOME/global-prompt.json` (mode 0600) and is editable
-through `GET/POST /api/global-prompt/state`, so the panel and the host always
-agree.
+## Installation
 
-## Install
+**Option 1 — plugin marketplace (recommended)**
 
-### Plugin marketplace
+Search `dsh-global-prompt` in DSH's plugin marketplace.
 
-Search for `dsh-global-prompt` in the Harness plugin marketplace and install it.
-
-### Release tarball
+**Option 2 — release tarball**
 
 ```bash
-dsh plugin --profile web add ./dsh-global-prompt-1.0.0.tgz
+dsh plugin --profile web add https://github.com/KunKun24/dsh-global-prompt/releases/download/v1.1.0/dsh-global-prompt-1.1.0.tgz
 ```
 
-### Manual
+**Option 3 — local source**
 
 ```bash
-cp -r dsh-global-prompt ~/.dsh/profiles/web/vendor/
-# add to ~/.dsh/profiles/web/package.json
-#   "dependencies": { "dsh-global-prompt": "file:./vendor/dsh-global-prompt" }
-cd ~/.dsh/profiles/web && pnpm install && dsh web
+dsh plugin --profile web add link:/path/to/dsh-global-prompt
 ```
 
-Restart the instance after installing.
+Reload the page; a "全局提示词" entry appears in the sidebar.
 
-## Uninstall
+## Usage
 
-Remove it from `dsh.profile.bundles` and `dependencies`, run `pnpm install` and
-restart. Delete `$DSH_HOME/global-prompt.json` if you also want to drop the text.
+1. Sidebar → "全局提示词"
+2. Enable a switch and write the content (or turn on the Chinese reasoning preset)
+3. Check "最终生效内容" to see the injected text
+4. Start a new conversation
 
-## License
+## Configuration
 
-MIT © 2026 困困
+| Option | Meaning |
+| --- | --- |
+| Chinese reasoning preset | Built-in "please reason in Chinese" |
+| Global persona | Custom identity and tone |
+| Global prompt | Extra requirements such as format, language, taboos |
 
----
+Limits: 4000 characters total, 2000 per field, so the context window is not squeezed.
 
-## About AIGC
+## Compatibility & trade-offs
 
-> This project contains AIGC (AI-generated) content. AI shortened development time; every line of code was carefully reviewed.
+- Injected in the **first turn only**
+- Placed after the deployment persona; deployment config is never overridden
+- Scope handling avoids the Cordis guard-proxy `JSON.stringify` trap, so messages keep sending
+
+## Data & privacy
+
+Stored locally in your profile data directory (`global-prompt.json`). Nothing is uploaded, nothing is measured.
+
+## Version & author
+
+- Version **1.1.0** ([changelog](CHANGELOG.md))
+- Author: 困困 (KunKun) · GitHub [@KunKun24](https://github.com/KunKun24) · Telegram [@sad1881](https://t.me/sad1881)
+- License: [MIT](LICENSE)
+
+Contains AIGC-assisted code, reviewed line by line and verified on a real instance.
