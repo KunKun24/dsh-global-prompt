@@ -88,10 +88,17 @@ export function composePrompt(s) {
 }
 
 export function apply(ctx) {
+  // The prompt section is the whole point of this plugin, but a host without
+  // systemPrompt composition must not crash the panel or the fetch bridge.
+  if (!ctx.systemPrompt || typeof ctx.systemPrompt.section !== 'function') return;
+  const order = typeof ctx.systemPrompt.getSectionOrder === 'function'
+    ? ctx.systemPrompt.getSectionOrder('DEPLOYMENT_PERSONA_PREFIX') + 1
+    : 100;
+  try {
   ctx.effect(() =>
     ctx.systemPrompt.section({
       name: 'global-prompt',
-      order: ctx.systemPrompt.getSectionOrder('DEPLOYMENT_PERSONA_PREFIX') + 1,
+      order,
       interpolate: false,
       text: (context) => {
         // 只在会话首次组装时注入；后续轮次返回空串，避免累积超限
@@ -101,6 +108,7 @@ export function apply(ctx) {
       },
     }),
   );
+  } catch {}
 
   const json = (obj) =>
     new Response(JSON.stringify(obj), {
